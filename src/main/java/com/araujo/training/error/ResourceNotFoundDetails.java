@@ -2,36 +2,7 @@ package com.araujo.training.error;
 
 import java.util.Date;
 
-public class ResourceNotFoundDetails {
-
-    private String title;
-    private Integer status;
-    private String  detail;
-    private Date timestamp;
-    private String developerMessage;
-
-    public ResourceNotFoundDetails() {
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public String getDeveloperMessage() {
-        return developerMessage;
-    }
+public class ResourceNotFoundDetails extends ErrorDetail{
 
     public static final class Builder {
         private String title;
@@ -74,11 +45,11 @@ public class ResourceNotFoundDetails {
 
         public ResourceNotFoundDetails build() {
             ResourceNotFoundDetails resourceNotFoundDetails = new ResourceNotFoundDetails();
-            resourceNotFoundDetails.detail = this.detail;
-            resourceNotFoundDetails.timestamp = this.timestamp;
-            resourceNotFoundDetails.status = this.status;
-            resourceNotFoundDetails.title = this.title;
-            resourceNotFoundDetails.developerMessage = this.developerMessage;
+            resourceNotFoundDetails.setDetail(detail);
+            resourceNotFoundDetails.setTimestamp(timestamp);
+            resourceNotFoundDetails.setStatus(status);
+            resourceNotFoundDetails.setTitle(title);
+            resourceNotFoundDetails.setDeveloperMessage(developerMessage);
             return resourceNotFoundDetails;
         }
     }

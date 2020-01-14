@@ -9,8 +9,10 @@ import com.araujo.training.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -44,7 +46,20 @@ public class StudentEndpoint {
 
     //@RequestMapping(method = RequestMethod.POST)
     @PostMapping
-    public ResponseEntity<?> insertStudent(@RequestBody Student student){
+    public ResponseEntity<?> insertStudent(@Valid @RequestBody Student student){
+        studentDao.save(student);
+        return new ResponseEntity<>(student, HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/forceErrorTransaction")
+    @Transactional // se a execao for do tipo unchecked (RuntimeException), nao precisa declarar o tipo de rollback
+    //@Transactional(rollbackFor = Exception.class) // se a execao for do tipo checked, necessario declarar qual o tipo de execao para o rollback
+    public ResponseEntity<?> insertStudentError(@RequestBody Student student){
+        studentDao.save(student);
+        student.setId(null);
+        studentDao.save(student);
+        if(true)
+            throw new RuntimeException("Test transaction");
         studentDao.save(student);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
