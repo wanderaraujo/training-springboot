@@ -1,36 +1,28 @@
 package com.araujo.training.error;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class ValidationErrorDetails extends ErrorDetail{
 
-    private String field;
-    private String fieldMessage;
+    private List<FieldsErrorValidation> errorsValidation;
 
-    public String getField() {
-        return field;
+    public List<FieldsErrorValidation> getErrorsValidation() {
+        return errorsValidation;
     }
 
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public String getFieldMessage() {
-        return fieldMessage;
-    }
-
-    public void setFieldMessage(String fieldMessage) {
-        this.fieldMessage = fieldMessage;
+    public void setErrorsValidation(List<FieldsErrorValidation> errorsValidation) {
+        this.errorsValidation = errorsValidation;
     }
 
     public static final class Builder {
         private String title;
-        private String field;
         private Integer status;
-        private String fieldMessage;
         private String  detail;
         private Date timestamp;
         private String developerMessage;
+        private List<FieldsErrorValidation> errorsValidation;
 
         private Builder() {
         }
@@ -44,18 +36,8 @@ public class ValidationErrorDetails extends ErrorDetail{
             return this;
         }
 
-        public Builder field(String field) {
-            this.field = field;
-            return this;
-        }
-
         public Builder status(Integer status) {
             this.status = status;
-            return this;
-        }
-
-        public Builder fieldMessage(String fieldMessage) {
-            this.fieldMessage = fieldMessage;
             return this;
         }
 
@@ -74,6 +56,11 @@ public class ValidationErrorDetails extends ErrorDetail{
             return this;
         }
 
+        public Builder errorsValidation(List errorsValidation) {
+            this.errorsValidation = errorsValidation;
+            return this;
+        }
+
         public ValidationErrorDetails build() {
             ValidationErrorDetails validationErrorDetails = new ValidationErrorDetails();
             validationErrorDetails.setTitle(title);
@@ -81,8 +68,7 @@ public class ValidationErrorDetails extends ErrorDetail{
             validationErrorDetails.setDetail(detail);
             validationErrorDetails.setTimestamp(timestamp);
             validationErrorDetails.setDeveloperMessage(developerMessage);
-            validationErrorDetails.field = field;
-            validationErrorDetails.fieldMessage = fieldMessage;
+            validationErrorDetails.errorsValidation = errorsValidation;
             return validationErrorDetails;
         }
     }

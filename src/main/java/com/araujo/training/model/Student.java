@@ -2,6 +2,7 @@ package com.araujo.training.model;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,10 @@ import static java.util.Arrays.asList;
 @Entity
 public class Student extends AbstractEntity{
 
-    @NotEmpty
+    @NotBlank
     private String name;
 
-    @NotEmpty
+    @NotBlank
     @Email
     private String email;
 
