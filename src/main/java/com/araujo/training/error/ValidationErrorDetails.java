@@ -1,10 +1,9 @@
 package com.araujo.training.error;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
-public class ValidationErrorDetails extends ErrorDetail{
+public class ValidationErrorDetails extends ErrorDetails {
 
     private List<FieldsErrorValidation> errorsValidation;
 
