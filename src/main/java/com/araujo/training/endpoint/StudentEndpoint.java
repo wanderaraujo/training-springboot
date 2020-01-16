@@ -7,6 +7,7 @@ import com.araujo.training.repository.StudentRepository;
 import com.araujo.training.util.DateUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +33,9 @@ public class StudentEndpoint {
 
     //@RequestMapping(method = RequestMethod.GET)
     @GetMapping
-    public ResponseEntity<?> listAll(){
+    public ResponseEntity<?> listAll(Pageable pageable){
         System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return new ResponseEntity<>(studentDao.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(studentDao.findAll(pageable), HttpStatus.OK);
     }
 
     //@RequestMapping(method = RequestMethod.GET, path = "/{id}")
