@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("students")
+@RequestMapping("v1/students")
 public class StudentEndpoint {
 
     @Autowired
@@ -67,8 +67,8 @@ public class StudentEndpoint {
     }
 
     //@RequestMapping(method = RequestMethod.DELETE)
-    @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping(path = "/admin/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteStudent(@PathVariable("id") Long id){
         verifyIfStudentExists(id);
         studentDao.deleteById(id);
