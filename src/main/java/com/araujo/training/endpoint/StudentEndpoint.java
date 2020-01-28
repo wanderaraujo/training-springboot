@@ -36,7 +36,7 @@ public class StudentEndpoint {
     @GetMapping
     public ResponseEntity<?> listAll(Pageable pageable){
         System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return new ResponseEntity<>(studentDao.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(studentDao.findAll(), HttpStatus.OK);
     }
 
     //@RequestMapping(method = RequestMethod.GET, path = "/{id}")
