@@ -1,5 +1,7 @@
 package com.araujo.training.javaclient;
 
+import com.araujo.training.handler.RestExceptionHandler;
+import com.araujo.training.handler.RestResponseHandler;
 import com.araujo.training.model.PageableResponse;
 import com.araujo.training.model.Student;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -16,11 +18,13 @@ public class JavaClientDAO {
     RestTemplate restTemplate = new RestTemplateBuilder()
             .rootUri("http://localhost:8080/v1/students")
             .basicAuthentication("user_01", "123")
+            .errorHandler(new RestResponseHandler())
             .build();
 
     RestTemplate restTemplateAdmin = new RestTemplateBuilder()
             .rootUri("http://localhost:8080/v1/students/admin")
-            .basicAuthentication("user_01", "123")
+            .basicAuthentication("admin_01", "123s")
+            .errorHandler(new RestResponseHandler())
             .build();
 
     public Student findById(Long id){
@@ -39,6 +43,15 @@ public class JavaClientDAO {
                 HttpMethod.POST, new HttpEntity<>(student, createJsonHeader()), Student.class );
 
         return exchangePost.getBody();
+    }
+
+    public void delete(Long id){
+        restTemplateAdmin.delete("/{id}", id);
+    }
+
+    public Student update(Student student){
+        restTemplate.put("/", student);
+        return student;
     }
 
     private static HttpHeaders createJsonHeader(){
