@@ -36,7 +36,7 @@ public class StudentEndpoint {
     @GetMapping
     public ResponseEntity<?> listAll(Pageable pageable){
         System.out.println(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return new ResponseEntity<>(studentDao.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(studentDao.findAll(pageable), HttpStatus.OK);
     }
 
     //@RequestMapping(method = RequestMethod.GET, path = "/{id}")
@@ -47,7 +47,7 @@ public class StudentEndpoint {
     }
 
     //@RequestMapping(method = RequestMethod.POST)
-    @PostMapping
+    @PostMapping(path = "/admin")
     public ResponseEntity<?> insertStudent(@Valid @RequestBody Student student){
         studentDao.save(student);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
