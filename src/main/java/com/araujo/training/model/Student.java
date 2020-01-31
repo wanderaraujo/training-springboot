@@ -13,12 +13,20 @@ import static java.util.Arrays.asList;
 @Entity
 public class Student extends AbstractEntity{
 
-    @NotBlank
+    @NotBlank(message = "Nome do estudante nao pode ser em branco")
     private String name;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Email do estudante nao pode ser em branco")
+    @Email(message = "Email do estudante invalido")
     private String email;
+
+    public Student() {
+    }
+
+    public Student(@NotBlank String name, @NotBlank @Email String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     public String getName() {
         return name;
